@@ -26,7 +26,7 @@ export default function Controller({ onNext, onPrv }) {
             case "pause":
                 return <MaterialIcons name="pause" size={45} />
             default:
-                return <MaterialIcons name="user" size={45} />
+                return <ActivityIndicator size={45} color="#303030"/>
         }
     }
 

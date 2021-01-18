@@ -8,12 +8,16 @@
  */
 
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, StatusBar } from 'react-native';
 import Player from './src/Player';
+
+
 
 export default function App() {
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor="#030303"/>
+      
       <Player/>
     </View>
   );
@@ -22,8 +26,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    // alignItems: 'center',
+    backgroundColor: '#ffffff',
+    alignItems: 'center',
     justifyContent: 'center',
   },
 });
