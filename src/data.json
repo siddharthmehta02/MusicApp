@@ -1,10 +1,10 @@
 /* eslint-disable prettier/prettier */
 [
     {
-        "title": "Death Bed",
-        "artist": "Powfu",
-        "artwork": "https://samplesongs.netlify.app/album-arts/death-bed.jpg",
-        "url": "https://samplesongs.netlify.app/Death%20Bed.mp3",
+        "title": "Kho Gaye Hum Kahan",
+        "artist": "Jasleen Royal, Prateek Kuhad",
+        "artwork": "https://pagalsong.in/uploads//thumbnails/300x300/id3Picture_946939838.jpg",
+        "url": "https://pagalsong.in/uploads/systemuploads/mp3/Baar%20Baar%20Dekho/Kho%20Gaye%20Hum%20Kahan.mp3",
         "id": "1"
     },
     {
@@ -15,10 +15,10 @@
         "id": "2"
     },
     {
-        "title": "Faded",
-        "artist": "Alan Walker",
-        "artwork": "https://samplesongs.netlify.app/album-arts/faded.jpg",
-        "url": "https://samplesongs.netlify.app/Faded.mp3",
+        "title": "Dil Diyan Gallan",
+        "artist": "Atif Aslam",
+        "artwork": "https://pagalsong.in/uploads//thumbnails/300x300/id3Picture_519886055.jpg",
+        "url": "https://pagalsong.in/uploads/systemuploads/mp3/Tiger%20Zinda%20Hai/Dil%20Diyan%20Gallan%20(Tiger%20Zinda%20Hai)%20128%20Kbps.mp3",
         "id": "3"
     },
     {

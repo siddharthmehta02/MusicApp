@@ -1,5 +1,7 @@
 /* eslint-disable prettier/prettier */
 
+// ho rha h, shaant reh, maa chudi padi h laptop ki
+
 import TrackPlayer from 'react-native-track-player';
 
 module.exports = async function() {
