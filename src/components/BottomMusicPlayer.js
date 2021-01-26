@@ -1,14 +1,15 @@
 /* eslint-disable prettier/prettier */
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef, useContext } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions, Pressable, ActivityIndicator, ImageBackground } from 'react-native';
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import { useNavigation } from '@react-navigation/native';
+// import { useNavigation } from '@react-navigation/native';
 import TrackPlayer, { usePlaybackState, useTrackPlayerProgress } from 'react-native-track-player';
 import Player from '../Player';
-import songs from '../data.json'
+// import songs from '../data.json'
 import TextTicker from 'react-native-text-ticker';
 import Slider from '@react-native-community/slider';
+import { SongContext } from '../provider/SongProvider';
 
 
 
@@ -16,29 +17,34 @@ import Slider from '@react-native-community/slider';
 const { width, height } = Dimensions.get('window')
 const bottomwidth = width / 8
 export default function BottomMusicPlayer() {
-
-    const [ready, setReady] = useState(true)
-    const navigation = useNavigation();
-    const firstSong = songs[0]
-    const playbackState = usePlaybackState()
+    const contextData = useContext(SongContext);
+    const [ready, setReady] = useState(true);
+    // const navigation = useNavigation();
+    // const firstSong = songs[0];
+    const playbackState = usePlaybackState();
     const { position, duration } = useTrackPlayerProgress();
-    const [isPlaying, setIsPlaying] = useState("playing")
-    const [background, setBackground] = useState()
-    const [trackObject, setTrackObject] = useState(firstSong)
-    const isPlayerReady = useRef(false)
+    const [isPlaying, setIsPlaying] = useState("playing");
+    const [background, setBackground] = useState();
+    // const [trackObject, setTrackObject] = useState(contextData.songs);
+    // console.log("Track Objext");
+    console.log("YPPPPPPPP")
+    console.log(contextData);
+    const isPlayerReady = useRef(false);
+    // const [songs, setSongs] = useState();
+
 
 
     useEffect(() => {
-        navigation.setOptions({ headerShown: false });
+        // navigation.setOptions({ headerShown: false });
         TrackPlayer.setupPlayer().then(async () => {
             isPlayerReady.current = true
             await TrackPlayer.reset();
-            await TrackPlayer.add(songs);
+            await TrackPlayer.add(contextData.item);
             // play.current = true
             TrackPlayer.play();
-            
-        })
-    }, [])
+
+        });
+    });
     useEffect(() => {
         if (playbackState === 'playing' || playbackState === 3) {
             setIsPlaying('pause');
@@ -72,19 +78,19 @@ export default function BottomMusicPlayer() {
 
     const playPause = () => {
         if (isPlaying === "playing") {
-            TrackPlayer.play()
+            TrackPlayer.play();
         }
         else if (isPlaying === "pause") {
-            TrackPlayer.pause()
+            TrackPlayer.pause();
         }
     };
 
-    const renderArtwork = () => {
+    const renderArtwork = (data) => {
         return (
             <View style={styles.artworkContainer}>
                 <Image
                     style={styles.artwork}
-                    source={{ uri: trackObject.artwork }}
+                    source={{ uri: data.Artwork }}
                 />
                 <View style={styles.titleParent}>
                     <TextTicker
@@ -95,13 +101,27 @@ export default function BottomMusicPlayer() {
                         repeatSpacer={100}
                         marqueeDelay={5000}
                     >
-                        {trackObject.title}
+                        {data.Title}
                     </TextTicker>
-                    <Text style={styles.artist}>{trackObject.artist}</Text>
+                    <Text style={styles.artist}>{data.Artist}</Text>
                 </View>
             </View>
         );
     };
+
+    // const getapi = async () => {
+    //     console.log("inside")
+
+    //     // Storing response 
+    //     const response = await fetch('http://127.0.0.1:5000/getAllSongs');
+
+    //     // Storing data in form of JSON
+    //     console.log("inside");
+
+    //     var data = await response.json();
+    //     setSongs(data);
+    //     console.log(data);
+    // };
 
     const handleChange = (val) => {
         TrackPlayer.seekTo(val);
@@ -109,32 +129,32 @@ export default function BottomMusicPlayer() {
 
     const goNext = async () => {
         TrackPlayer.skipToNext();
-        var trackId = await TrackPlayer.getCurrentTrack();
-        var trackObject = await TrackPlayer.getTrack(trackId);
-        setTrackObject(trackObject);
-        console.log(trackObject)
+        // var trackId = await TrackPlayer.getCurrentTrack();
+        // var trackObject = await TrackPlayer.getTrack(trackId);
+        // setTrackObject(trackObject);
+        // console.log(trackObject)
         TrackPlayer.play()
     };
 
     const goBack = async () => {
         TrackPlayer.skipToPrevious();
-        var trackId = await TrackPlayer.getCurrentTrack();
-        var trackObject = await TrackPlayer.getTrack(trackId);
-        setTrackObject(trackObject);
-        console.log(trackObject)
+        // var trackId = await TrackPlayer.getCurrentTrack();
+        // var trackObject = await TrackPlayer.getTrack(trackId);
+        // setTrackObject(trackObject);
+        // console.log(trackObject)
         TrackPlayer.play()
     };
-
     const renderPlayer = () => {
         return (
-            <ImageBackground source={{ uri: trackObject.artwork }} style={styles.image}>
+
+            <ImageBackground source={{ uri: contextData.item.Artwork }} style={styles.image}>
                 <View style={styles.container}>
 
-                    <TouchableOpacity style={{position:'absolute',left:20,top:40}} onPress={()=>setReady(true)}>
+                    <TouchableOpacity style={{ position: 'absolute', left: 20, top: 40 }} onPress={() => setReady(true)}>
                         <AntDesign name='down' size={30} color='white' />
                     </TouchableOpacity>
                     <View >
-                        {renderArtwork()}
+                        {renderArtwork(contextData.item)}
                     </View>
                     <View style={styles.slider}>
                         <Slider
@@ -189,10 +209,10 @@ export default function BottomMusicPlayer() {
 
             {ready ?
                 <>
-                    <Image style={styles.musicImage} source={{ uri: trackObject.artwork }} />
+                    <Image style={styles.musicImage} source={{ uri: contextData.item.Artwork }} />
                     <View style={styles.musicCredits}>
-                        <Text style={styles.musicName}>{trackObject.title}</Text>
-                        <Text style={styles.musicArtist}>{trackObject.artist}</Text>
+                        <Text style={styles.musicName}>{contextData.item.Title}</Text>
+                        <Text style={styles.musicArtist}>{contextData.item.Artist}</Text>
                     </View>
                     <View style={styles.musicController}>
                         <TouchableOpacity onPress={() => goBack()} >
@@ -254,11 +274,11 @@ const styles = StyleSheet.create({
     },
     playerBar: {
         backgroundColor: 'red',
-        height: Dimensions.get('window').height+bottomwidth,
+        height: Dimensions.get('window').height + bottomwidth,
         width: Dimensions.get('window').width,
         // position:'absolute',
         // bottom:-bottomwidth
-        marginBottom:-bottomwidth
+        marginBottom: -bottomwidth
     },
     artworkContainer: {
         justifyContent: 'space-evenly',

@@ -1,76 +1,98 @@
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable prettier/prettier */
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, Text, View, FlatList, Image, Dimensions, TouchableOpacity, Modal, TouchableWithoutFeedback } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import axios from 'axios';
 import TextTicker from 'react-native-text-ticker';
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import BottomMusicPlayer from './components/BottomMusicPlayer';
+import { SongContext } from './provider/SongProvider';
 
-import songs from './data.json'
 
 const { width, height } = Dimensions.get('window')
 
 export default function HomeScreen() {
-    const [modalVisible, setModalVisible] = useState(false)
+    // const [song, setSongs] = useState()
+    // const getapi = async () => {
+    //     console.log("inside")
+
+    //     // Storing response 
+    //     const response = await fetch('http://127.0.0.1:5000/getAllSongs');
+
+    //     // Storing data in form of JSON 
+    //     console.log("inside");
+
+    //     var data = await response.json();
+    //     setSongs(data);
+    //     console.log(data);
+    // };
+
+    // useEffect(() => {
+
+    //     getapi()
+    // }, []);
+
+    const [modalVisible, setModalVisible] = useState(false);
+
 
     const renderItem = ({ item }) => {
         return (
             <View style={styles.cover}>
 
 
-
+                <TouchableOpacity onPress={()=>contextData.setItem(item)}>
+                    
                 <Image
                     style={styles.image}
-                    source={{ uri: item.artwork }}
+                    source={{ uri: item.Artwork }}
                 />
-                <Text style={styles.title} numberOfLines={1} ellipsizeMode='tail'>{item.title}</Text>
-                <Text style={styles.artist} numberOfLines={1} ellipsizeMode='tail'>{item.artist}</Text>
-
-
-
-
-
+                <Text style={styles.title} numberOfLines={1} ellipsizeMode='tail'>{item.Title}</Text>
+                <Text style={styles.artist} numberOfLines={1} ellipsizeMode='tail'>{item.Artist}</Text>
+                </TouchableOpacity>
             </View>
-        )
-    }
+        );
+    };
     const renderItem_playlists = ({ item }) => {
         return (
             <View style={styles.cover_playlist}>
+                <TouchableOpacity>
                 <Image
                     style={styles.image_playlist}
                     source={{ uri: item.artwork }}
                 />
                 <Text style={styles.title} numberOfLines={1} ellipsizeMode='tail'>{item.title}</Text>
                 <Text style={styles.artist} numberOfLines={1} ellipsizeMode='tail'>{item.artist}</Text>
+                </TouchableOpacity>
             </View>
-        )
-    }
+        );
+    };
     const renderItem_artists = ({ item }) => {
         return (
             <View style={styles.cover}>
+                <TouchableOpacity>
                 <Image
                     style={styles.artist_image}
                     source={{ uri: item.artwork }}
                 />
                 <Text style={styles.title_artist} numberOfLines={1} ellipsizeMode='tail'>{item.title}</Text>
+                </TouchableOpacity>
 
             </View>
-        )
-    }
-
+        );
+    };
+    const contextData = useContext(SongContext);
     return (
         <View style={styles.container}>
-            
             <ScrollView style={styles.scrollView}>
-            <Text style={{color:'white',fontSize:40,margin:10}}>Hello SID :)</Text>
+                <Text style={{ color: 'white', fontSize: 40, margin: 10 }}>Hello SID :)</Text>
                 {/*SONGS */}
                 <View style={styles.songs}>
                     <Text style={styles.Header}>Songs</Text>
                     <View style={styles.songsSlider}>
                         <FlatList
                             horizontal
-                            data={songs}
+                            data={contextData.songs}
                             renderItem={renderItem}
                             keyExtractor={item => item.id}
                             showsHorizontalScrollIndicator={false}
@@ -84,7 +106,7 @@ export default function HomeScreen() {
                     <View style={styles.songsSlider}>
                         <FlatList
                             horizontal
-                            data={songs}
+                            data={contextData.songs}
                             renderItem={renderItem}
                             keyExtractor={item => item.id}
                             showsHorizontalScrollIndicator={false}
@@ -97,7 +119,7 @@ export default function HomeScreen() {
                     <View style={styles.songsSlider}>
                         <FlatList
                             horizontal
-                            data={songs}
+                            data={contextData.songs}
                             renderItem={renderItem_playlists}
                             keyExtractor={item => item.id}
                             showsHorizontalScrollIndicator={false}
@@ -111,44 +133,25 @@ export default function HomeScreen() {
                     <View style={styles.songsSlider}>
                         <FlatList
                             horizontal
-                            data={songs}
+                            data={contextData.songs}
                             renderItem={renderItem_artists}
                             keyExtractor={item => item.id}
                             showsHorizontalScrollIndicator={false}
                         />
                     </View>
                 </View>
-
-
-
-
-                {/*
-            
-            songs
-            recently played
-            playlists
-            artists
-            albums
-            New release of fav artists
-            
-            
-            */}
             </ScrollView>
-
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
     container: {
         backgroundColor: 'black',
-
-        
-
     },
-    scrollView:{
-        marginTop:10,
-        marginBottom:80
+    scrollView: {
+        marginTop: 10,
+        marginBottom: 80,
     },
     songs: {
         marginHorizontal: 10,
@@ -160,21 +163,21 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         color: 'white',
         borderBottomColor: '#ffffff50',
-        borderBottomWidth: 1
+        borderBottomWidth: 1,
     },
     title: {
         fontWeight: "bold",
-        color: 'white'
+        color: 'white',
     },
     title_artist: {
         fontWeight: "bold",
         color: 'white',
 
         textAlign: 'center',
-        backgroundColor: 'red'
+        backgroundColor: 'red',
     },
     artist: {
-        color: 'white'
+        color: 'white',
     },
     image: {
         width: width / 3,

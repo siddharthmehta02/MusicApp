@@ -14,6 +14,10 @@ import Player from './src/Player';
 import Router from './src/navigations/Router';
 import HomeBottomNavigator from './src/navigations/HomeBottomNavigator';
 import { NavigationContainer } from '@react-navigation/native';
+import { SongProvider } from './src/provider/SongProvider';
+import BottomMusicPlayer from './src/components/BottomMusicPlayer';
+
+
 
 
 
@@ -21,7 +25,7 @@ import { NavigationContainer } from '@react-navigation/native';
 //   return (
 //     <View style={styles.container}>
 //       <StatusBar barStyle="light-content" backgroundColor="#030303"/>
-      
+
 //       <Player/>
 //     </View>
 //   );
@@ -38,14 +42,16 @@ import { NavigationContainer } from '@react-navigation/native';
 
 const App: () => React$Node = () => {
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <Router/>
-    </>
+      <>
+        <StatusBar barStyle="dark-content" />
+        <SongProvider>
+        <Router />
+        {/* <BottomMusicPlayer/> */}
+        </SongProvider>
+      </>
   );
 };
 
-const styles = StyleSheet.create({
-});
+
 
 export default App;
