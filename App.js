@@ -10,12 +10,12 @@
 import 'react-native-gesture-handler'
 import React from 'react';
 import { StyleSheet, Text, View, StatusBar } from 'react-native';
-import Player from './src/Player';
+// import Player from './src/Player';
 import Router from './src/navigations/Router';
-import HomeBottomNavigator from './src/navigations/HomeBottomNavigator';
-import { NavigationContainer } from '@react-navigation/native';
+// import HomeBottomNavigator from './src/navigations/HomeBottomNavigator';
+// import { NavigationContainer } from '@react-navigation/native';
 import { SongProvider } from './src/provider/SongProvider';
-import BottomMusicPlayer from './src/components/BottomMusicPlayer';
+// import BottomMusicPlayer from './src/components/BottomMusicPlayer';
 
 
 

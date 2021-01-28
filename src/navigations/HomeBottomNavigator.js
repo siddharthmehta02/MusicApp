@@ -13,6 +13,7 @@ import BottomMusicPlayer from '../components/BottomMusicPlayer';
 import HomeScreen from '../HomeScreen';
 import ExploreScreen from '../ExploreScreen';
 import UserScreen from '../UserScreen';
+import Example from '../components/Example';
 const Tab = createBottomTabNavigator()
 
 const HomeBottomNavigator = () => {
@@ -69,9 +70,10 @@ const HomeBottomNavigator = () => {
                     }}
                 />
             </Tab.Navigator>
-            <BottomMusicPlayer/>
+            {/* <BottomMusicPlayer/> */}
+            <Example/>
         </>
-    )
-}
+    );
+};
 
 export default HomeBottomNavigator;

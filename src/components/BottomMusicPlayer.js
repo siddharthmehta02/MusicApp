@@ -5,7 +5,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 // import { useNavigation } from '@react-navigation/native';
 import TrackPlayer, { usePlaybackState, useTrackPlayerProgress } from 'react-native-track-player';
-import Player from '../Player';
+// import Player from '../Player';
 // import songs from '../data.json'
 import TextTicker from 'react-native-text-ticker';
 import Slider from '@react-native-community/slider';
@@ -14,8 +14,10 @@ import { SongContext } from '../provider/SongProvider';
 
 
 
-const { width, height } = Dimensions.get('window')
-const bottomwidth = width / 8
+const { width, height } = Dimensions.get('window');
+const bottomwidth = width / 8;
+
+
 export default function BottomMusicPlayer() {
     const contextData = useContext(SongContext);
     const [ready, setReady] = useState(true);
