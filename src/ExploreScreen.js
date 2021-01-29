@@ -3,7 +3,6 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import BottomMusicPlayer from './components/BottomMusicPlayer';
 import ExploreAlbumMix from './components/ExploreAlbumMix';
 import ExploreMusicMix from './components/ExploreMusicMix';
 import ExplorePlaylist from './components/ExplorePlaylist';

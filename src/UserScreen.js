@@ -2,7 +2,6 @@
 import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
-import BottomMusicPlayer from './components/BottomMusicPlayer'
 import UserDetails from './components/UserDetails'
 import UserFavorites from './components/UserFavorites'
 import UserPlaylist from './components/UserPlaylist'

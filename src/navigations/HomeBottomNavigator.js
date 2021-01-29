@@ -7,7 +7,6 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 // import Feather from 'react-native-vector-icons/Feather';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import BottomMusicPlayer from '../components/BottomMusicPlayer';
 
 
 import HomeScreen from '../HomeScreen';
@@ -70,7 +69,6 @@ const HomeBottomNavigator = () => {
                     }}
                 />
             </Tab.Navigator>
-            {/* <BottomMusicPlayer/> */}
             <Example/>
         </>
     );

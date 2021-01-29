@@ -19,28 +19,29 @@ const SongProvider = (props) => {
         var data = await response.json();
         setSongs(data);
         setItem(songs[0]);
+        setQueue(songs.slice(0,11))
         setReady(true);
         // console.log('data');
         // console.log(data);
     };
 
-    useEffect(() => {
-        console.log(item);
-    }, [item]);
+    // useEffect(() => {
+    //     console.log(item);
+    // }, [item]);
 
     // const setTheQeue=(item)=>{
     //     setQueue(item)
-    //     //peeche ka queue
+    //     //peeche ka queue (Q hai peeche ka???)
     // };
 
     useEffect( () => {
         if (!ready) {
-            console.log('useEffect called');
+            // console.log('useEffect called');
             getapi();
-            console.log('songs');
-            console.log(songs);
-            console.log('item');
-            console.log(item);
+            // console.log('songs');
+            // console.log(songs);
+            // console.log('item');
+            // console.log(item);
         }
     });
     return (

@@ -1,41 +1,14 @@
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable prettier/prettier */
-import React, { useContext, useEffect, useState } from 'react';
-import { StyleSheet, Text, View, FlatList, Image, Dimensions, TouchableOpacity, Modal, TouchableWithoutFeedback } from 'react-native';
+import React, { useContext } from 'react';
+import { StyleSheet, Text, View, FlatList, Image, Dimensions, TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import axios from 'axios';
-import TextTicker from 'react-native-text-ticker';
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import BottomMusicPlayer from './components/BottomMusicPlayer';
 import { SongContext } from './provider/SongProvider';
 
 
-const { width, height } = Dimensions.get('window')
+const { width } = Dimensions.get('window')
 
 export default function HomeScreen() {
-    // const [song, setSongs] = useState()
-    // const getapi = async () => {
-    //     console.log("inside")
-
-    //     // Storing response 
-    //     const response = await fetch('http://127.0.0.1:5000/getAllSongs');
-
-    //     // Storing data in form of JSON 
-    //     console.log("inside");
-
-    //     var data = await response.json();
-    //     setSongs(data);
-    //     console.log(data);
-    // };
-
-    // useEffect(() => {
-
-    //     getapi()
-    // }, []);
-
-    const [modalVisible, setModalVisible] = useState(false);
-
-
     const renderItem = ({ item }) => {
         return (
             <View style={styles.cover}>
@@ -135,7 +108,7 @@ export default function HomeScreen() {
                             horizontal
                             data={contextData.songs}
                             renderItem={renderItem_artists}
-                            keyExtractor={item => item.id}
+                            keyExtractor={(item) => { return item.id; }}
                             showsHorizontalScrollIndicator={false}
                         />
                     </View>
